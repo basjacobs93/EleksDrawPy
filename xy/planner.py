@@ -1,7 +1,40 @@
 from .hashindex import Index
-from math import hypot
-from .anneal import anneal, get_max_temp
+import math
 import random
+
+
+def anneal(state, max_temp, min_temp, steps):
+    factor = -math.log(float(max_temp) / min_temp)
+    state = state.copy()
+    best_state = state.copy()
+    best_energy = state.energy()
+    previous_energy = best_energy
+    for step in xrange(steps):
+        temp = max_temp * math.exp(factor * step / steps)
+        undo = state.do_move()
+        energy = state.energy()
+        change = energy - previous_energy
+        if change > 0 and math.exp(-change / temp) < random.random():
+            state.undo_move(undo)
+        else:
+            previous_energy = energy
+            if energy < best_energy:
+                # print step, temp, energy
+                best_energy = energy
+                best_state = state.copy()
+    return best_state
+
+def get_max_temp(state, iterations):
+    state = state.copy()
+    previous = state.energy()
+    total = 0
+    for _ in xrange(iterations):
+        state.do_move()
+        energy = state.energy()
+        total += abs(energy - previous)
+        previous = energy
+    average = total / iterations
+    return average * 2
 
 def sort_paths_greedy(paths, reversable=True):
     first = max(paths, key=lambda x: x[0][1])
@@ -95,7 +128,7 @@ class Model(object):
                 x2, y2 = self.paths[j][-1]
             else:
                 x2, y2 = self.paths[j][0]
-            self.distances[i] = hypot(x2 - x1, y2 - y1)
+            self.distances[i] = math.hypot(x2 - x1, y2 - y1)
             self.total_distance += self.distances[i]
     def energy(self):
         # return the total extra distance for this ordering

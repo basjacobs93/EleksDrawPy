@@ -1,14 +1,9 @@
-# `xy` Software for the Makeblock XY Plotter
+# `xy` Software for the EleksDraw Plotter
 
 ## Installation
 
     brew install py2cairo
     pip install -r requirements.txt
-
-You will probably need to set the `PORT` in device.py, as well as the `UP`
-and `DOWN` pen positions:
-
-https://github.com/fogleman/xy/blob/master/xy/device.py
 
 ## Examples
 
