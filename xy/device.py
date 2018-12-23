@@ -6,8 +6,6 @@ import time
 VID_PID = '1A86:7523'
 BAUD = 115200
 
-UP = 10
-DOWN = 40
 FEED_RATE = 5000 # millimeters per minute (max 5000)
 PEN_SPEED = 1000 # speed of pen up-down movement (max 5000)
 

@@ -8,7 +8,7 @@ def main(iteration):
             turtle.circle(-1, 90, 36)
         else:
             turtle.circle(1, 90, 36)
-    drawing = turtle.drawing.rotate_and_scale_to_fit(110, 85, step=90)
+    drawing = turtle.drawing.rotate_and_scale_to_fit(280, 200, step=90)
     # im = drawing.render()
     # im.write_to_png("out.png")
     xy.draw(drawing, verbose = True)

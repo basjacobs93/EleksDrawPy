@@ -1,5 +1,3 @@
-from __future__ import division
-
 from .drawing import Drawing
 from .hershey_fonts import *
 

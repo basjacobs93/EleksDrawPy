@@ -1,5 +1,3 @@
-from __future__ import division
-
 from math import sin, cos, radians, hypot
 
 from .paths import (
