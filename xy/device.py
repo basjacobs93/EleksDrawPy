@@ -62,12 +62,10 @@ class Device(object):
 
     def move(self, x, y):
         x = 'X%s' % -x
-        y = 'Y%s' % y
+        y = 'Y%s' % -y
         self.write('G01', x, y)
 
     def pen_up(self):
-        self.write('S1000')
-        self.write('M03 G1Z0 S0')
         self.write('M03 G1Z0 S0')
 
     def pen_down(self):
@@ -79,12 +77,10 @@ class Device(object):
         self.pen_up()
         self.move(*points[0])
         self.pen_down()
-        time.sleep(0.15)
+
         for point in points:
             self.move(*point)
         self.pen_up()
-        self.home()
-        time.sleep(0.15)
 
     def gcode(self, g):
         for line in g.lines:
