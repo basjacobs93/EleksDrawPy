@@ -9,11 +9,7 @@ try:
 except ImportError:
     cairo = None
 
-V3_SIZE = (12, 8.5)
-V3_BOUNDS = (0, 0, 12, 8.5)
-
-A3_SIZE = (16.93, 11.69)
-A3_BOUNDS = (0, 0, 16.93, 11.69)
+A4_BOUNDS = (0, 0, 240, 180)
 
 class Drawing(object):
     def __init__(self, paths=None):
@@ -244,7 +240,7 @@ class Drawing(object):
                 paths.append(path)
         return Drawing(paths)
 
-    def render(self, scale=109, margin=1, line_width=0.35/25.4,
+    def render(self, scale=15, margin=10, line_width=0.35,
             bounds=None, show_bounds=True):
         if cairo is None:
             raise Exception('Drawing.render() requires cairo')
