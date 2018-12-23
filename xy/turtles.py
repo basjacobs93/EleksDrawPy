@@ -1,4 +1,4 @@
-from drawing import Drawing
+from .drawing import Drawing
 import math
 
 def to_degrees(x):

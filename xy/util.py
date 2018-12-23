@@ -1,8 +1,8 @@
-from device import Device
+from .device import Device
+# from .drawing import Drawing
 from shapely.geometry import LineString
-import drawing
 import math
-import progress
+from .progress import Bar
 import time
 
 def simplify(points, tolerance=0.05):
@@ -40,16 +40,16 @@ def remove_duplicates(paths):
         result.append(path)
     return result
 
-def draw(x, tolerance=0.05):
-    if isinstance(x, drawing.Drawing):
-        x = x.paths
-    device = Device()
+def draw(x, tolerance=0.05, verbose = False):
+    # if isinstance(x, drawing.Drawing):
+    #     x = x.paths
+    device = Device(verbose)
     time.sleep(2)
     device.pen_up()
     time.sleep(1)
     device.home()
-    bar = progress.Bar()
-    for path in bar(x):
+    bar = Bar()
+    for path in bar(x.paths):
         if tolerance:
             path = simplify(path, tolerance)
         device.draw(path)

@@ -1,6 +1,6 @@
-from hashindex import Index
+from .hashindex import Index
 from math import hypot
-import anneal
+from .anneal import anneal, get_max_temp
 import random
 
 def sort_paths_greedy(paths, reversable=True):
@@ -163,4 +163,4 @@ if __name__ == '__main__':
     for n_paths in [10, 100, 1000, 10000]:
         for n_iterations in [None, 10, 100, 1000, 10000, 100000, 1000000]:
             pct = test(n_paths, n_iterations, 123)
-            print n_paths, n_iterations, pct
+            print(n_paths, n_iterations, pct)

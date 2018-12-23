@@ -1,19 +1,46 @@
-import serial
+from serial import Serial
+from serial.tools.list_ports import comports
+
 import time
 
-PORT = '/dev/tty.wchusbserial640'
+VID_PID = '1A86:7523'
 BAUD = 115200
 
 UP = 10
 DOWN = 40
+FEED_RATE = 5000 # millimeters per minute (max 5000)
+PEN_SPEED = 1000 # speed of pen up-down movement (max 5000)
+
+
+def find_port():
+    for port in comports():
+        if VID_PID in port[2]:
+            return port[0]
+    return None
 
 class Device(object):
 
-    def __init__(self, port=PORT, baud=BAUD, up=UP, down=DOWN, verbose=False):
-        self.serial = serial.Serial(port, baud) if port else None
-        self.up = up
-        self.down = down
+    def __init__(self, verbose=False):
         self.verbose = verbose
+
+        self.feed_rate = FEED_RATE
+        self.pen_speed = PEN_SPEED
+
+        port = find_port()
+        if port is None:
+            raise Exception('cannot find device')
+        self.serial = Serial(port, baudrate=BAUD, timeout=1)
+
+        self.configure()
+
+    def configure(self):
+        self.write('\r\n\r')
+        time.sleep(3)
+        self.serial.flushInput()
+        self.write('F{}'.format(self.feed_rate)) # feed rate
+        self.write('S{}'.format(self.pen_speed)) # pen speed
+        # self.write('G91') # relative distances
+        self.pen_up()
 
     def read(self):
         data = []
@@ -26,40 +53,36 @@ class Device(object):
     def write(self, *args):
         line = ' '.join(map(str, args))
         if self.verbose:
-            print line
-        if self.serial:
-            self.serial.write('%s\n' % line)
-        response = self.read()
+            print(line)
+        self.serial.write((line + '\n').encode('utf-8'))
+        response = self.serial.readline().strip().decode('utf-8')
         if self.verbose:
-            print response
+            print(response)
 
     def home(self):
         self.write('G28')
 
     def move(self, x, y):
-        x = 'X%s' % x
+        x = 'X%s' % -x
         y = 'Y%s' % y
-        self.write('G1', x, y)
-
-    def pen(self, position):
-        self.write('M1', position)
+        self.write('G01', x, y)
 
     def pen_up(self):
-        self.pen(self.up)
+        self.write('M03 G1Z0 S0')
 
     def pen_down(self):
-        self.pen(self.down)
+        self.write('M03 G1Z0 S1000')
 
-    def draw(self, points, up=None, down=None):
+    def draw(self, points):
         if not points:
             return
-        self.pen(self.up if up is None else up)
+        self.pen_up()
         self.move(*points[0])
-        self.pen(self.down if down is None else down)
+        self.pen_down()
         time.sleep(0.15)
         for point in points:
             self.move(*point)
-        self.pen(self.up if up is None else up)
+        self.pen_up()
         time.sleep(0.15)
 
     def gcode(self, g):
