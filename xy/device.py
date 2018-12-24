@@ -7,7 +7,6 @@ VID_PID = '1A86:7523'
 BAUD = 115200
 
 FEED_RATE = 5000 # millimeters per minute (max 5000)
-PEN_SPEED = 1000 # speed of pen up-down movement (max 5000)
 
 
 def find_port():
@@ -22,7 +21,6 @@ class Device(object):
         self.verbose = verbose
 
         self.feed_rate = FEED_RATE
-        self.pen_speed = PEN_SPEED
 
         port = find_port()
         if port is None:
@@ -36,8 +34,7 @@ class Device(object):
         time.sleep(3)
         self.serial.flushInput()
         self.write('F{}'.format(self.feed_rate)) # feed rate
-        self.write('S{}'.format(self.pen_speed)) # pen speed
-        # self.write('G91') # relative distances
+        self.write('M3')
         self.pen_up()
 
     def read(self):
@@ -66,15 +63,15 @@ class Device(object):
         self.write('G01', x, y)
 
     def pen_up(self):
-        self.write('M03 G1Z0 S0')
+        self.write('S0')
 
     def pen_down(self):
-        self.write('M03 G1Z0 S1000')
+        self.write('S40')
 
     def draw(self, points):
         if not points:
             return
-        self.pen_up()
+
         self.move(*points[0])
         self.pen_down()
 
