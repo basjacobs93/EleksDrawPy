@@ -91,3 +91,7 @@ def poisson_disc(x1, y1, x2, y2, r, n):
         else:
             active.remove(record)
     return grid.points.values(), pairs
+
+if __name__ == "__main__":
+    a = poisson_disc(0, 0, 20, 20, 10, 100)
+    print(a)

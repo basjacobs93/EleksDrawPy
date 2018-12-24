@@ -79,11 +79,11 @@ class Font(object):
         return result
 
 def main():
-    font = Font(xy.CURSIVE, 355)
+    font = Font(xy.CURSIVE, 600)
     d = font.wrap(TEXT, 115, 1, justify=True)
-    d = d.center(300, 208)
+    d = d.center(130, 120)
     d.render(bounds=xy.A4_BOUNDS).write_to_png('out.png')
-    # xy.draw(d)
+    xy.draw(d)
 
 if __name__ == '__main__':
     main()

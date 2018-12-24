@@ -110,12 +110,12 @@ def create_drawing():
                 done = False
         if done:
             break
-    print len(occupied)
+    print(len(occupied))
     shapes = []
     for pipe in pipes:
         pipe.add_sphere(pipe.position)
         shapes.extend(pipe.shapes)
-    print len(shapes)
+    print(len(shapes))
     scene = xyz.Scene(shapes)
     paths = scene.render((25, 25, 10), (0, 0, 0), (0, 0, 1), 60, 1, 0.1, 100, 0.05)
     # paths.append([(-1, -1), (1, -1), (1, 1), (-1, 1), (-1, -1)])
@@ -132,8 +132,8 @@ def main():
     drawing = drawing.origin().crop(n, n + o, 315 - n, 315 - n + o).scale_to_fit(315, 315)
     drawing = drawing.sort_paths_greedy().join_paths()
     drawing.render().write_to_png('pipes.png')
-    # drawing.save('pipes.dwg')
-    xy.draw(drawing)
+    drawing.save('pipes.dwg')
+    #xy.draw(drawing)
 
 if __name__ == '__main__':
     main()

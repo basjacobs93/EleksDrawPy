@@ -135,7 +135,7 @@ class Model(object):
 def main():
     args = sys.argv[1:]
     if len(args) != 1:
-        print 'Usage: python main.py input_image'
+        print('Usage: python main.py input_image')
         return
     paths = []
     model = Model(args[0])
@@ -143,26 +143,26 @@ def main():
     for i in range(ITERATIONS):
         error = model.average_error()
         if previous is None or previous - error > ERROR_RATE:
-            print i, error
+            print(i, error)
             if SAVE_FRAMES:
                 model.render('frames/%06d.png' % i)
             previous = error
         paths.extend(model.split())
     model.render('output.png')
-    print '-' * 32
+    print('-' * 32)
     depth = Counter(x.depth for x in model.quads)
     for key in sorted(depth):
         value = depth[key]
         n = 4 ** key
         pct = 100.0 * value / n
-        print '%3d %8d %8d %8.2f%%' % (key, n, value, pct)
-    print '-' * 32
-    print '             %8d %8.2f%%' % (len(model.quads), 100)
+        print('%3d %8d %8d %8.2f%%' % (key, n, value, pct))
+    print('-' * 32)
+    print('             %8d %8.2f%%' % (len(model.quads), 100))
     # for max_depth in range(max(depth.keys()) + 1):
     #     model.render('out%d.png' % max_depth, max_depth)
-    drawing = xy.Drawing(paths).scale_to_fit(315, 315).rotate(180).scale(1, -1)
+    drawing = xy.Drawing(paths).scale_to_fit(315, 315)
     drawing.render().write_to_png('quads.png')
-    xy.draw(drawing, tolerance=None)
+    # xy.draw(drawing, tolerance=None)
 
 if __name__ == '__main__':
     main()
