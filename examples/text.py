@@ -82,6 +82,7 @@ def main():
     font = Font(xy.CURSIVE, 600)
     d = font.wrap(TEXT, 115, 1, justify=True)
     d = d.center(130, 120)
+    d = d.join_paths(tolerance = 0.1).simplify_paths(tolerance = 0.1)
     d.render(bounds=xy.A4_BOUNDS).write_to_png('out.png')
     xy.draw(d)
 

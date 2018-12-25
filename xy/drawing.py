@@ -9,7 +9,7 @@ try:
 except ImportError:
     cairo = None
 
-A4_BOUNDS = (0, 0, 240, 180)
+A4_BOUNDS = (0, 0, 175, 250)
 
 class Drawing(object):
     def __init__(self, paths=None):
@@ -209,7 +209,7 @@ class Drawing(object):
     def scale_to_fit_width(self, width, padding=0):
         return self.scale_to_fit(width, 1e9, padding)
 
-    def scale_to_fit(self, width, height, padding=0):
+    def scale_to_fit(self, width=250, height=175, padding=0):
         width -= padding * 2
         height -= padding * 2
         scale = min(width / self.width, height / self.height)

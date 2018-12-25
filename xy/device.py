@@ -74,10 +74,11 @@ class Device(object):
 
         self.move(*points[0])
         self.pen_down()
-
+        time.sleep(0.15)
         for point in points:
             self.move(*point)
         self.pen_up()
+        time.sleep(0.15)
 
     def gcode(self, g):
         for line in g.lines:

@@ -41,6 +41,8 @@ for i, n in enumerate(noises):
     y += math.sin(a) * m
 
 drawing = xy.Drawing(paths)
-s = 315 / 2.0
-drawing = drawing.crop(-s, -s, s, s)
+width = 250
+height = 175
+drawing = drawing.crop_paths(-width/2, -height/2, width/2, height/2).center(width, height)
 drawing.render().write_to_png('contain.png')
+xy.draw(drawing)
