@@ -6,15 +6,20 @@ def to_degrees(x):
 
 class Turtle(object):
 
-    def __init__(self):
-        self.reset()
+    def __init__(self, start_up = False):
+        self.reset(start_up)
 
-    def reset(self):
+    def reset(self, start_up):
         self.x = 0
         self.y = 0
         self.h = 0
-        self.pen = True
-        self._path = [(self.x, self.y)]
+        if start_up:
+            self.pen = False
+            self._path = []
+        else:
+            self.pen = True
+            self._path = [(self.x, self.y)]
+
         self._paths = []
 
     def clear(self):
@@ -34,13 +39,14 @@ class Turtle(object):
 
     def pd(self):
         self.pen = True
+        self._path.append((self.x, self.y))
     pendown = down = pd
 
     def pu(self):
         self.pen = False
-        if len(self._path) > 1:
+        if len(self._path) > 0:
             self._paths.append(self._path)
-            self._path = [(self.x, self.y)]
+            self._path = []
     penup = up = pu
 
     def isdown(self):
@@ -62,7 +68,7 @@ class Turtle(object):
         self.goto(self.x, y)
 
     def seth(self, heading):
-        self.h = heading
+        self.h = (heading % 360)
     setheading = seth
 
     def home(self):

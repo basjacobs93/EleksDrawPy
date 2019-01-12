@@ -6,7 +6,7 @@ import time
 VID_PID = '1A86:7523'
 BAUD = 115200
 
-FEED_RATE = 5000 # millimeters per minute (max 5000)
+FEED_RATE = 4000 # millimeters per minute (max 5000)
 
 
 def find_port():
@@ -37,14 +37,6 @@ class Device(object):
         self.write('M3')
         self.pen_up()
 
-    def read(self):
-        data = []
-        while True:
-            c = self.serial.read(1) if self.serial else '\n'
-            if c == '\n':
-                return ''.join(data)
-            data.append(c)
-
     def write(self, *args):
         line = ' '.join(map(str, args))
         if self.verbose:
@@ -58,8 +50,8 @@ class Device(object):
         self.write('G28')
 
     def move(self, x, y):
-        x = 'X%s' % -x
-        y = 'Y%s' % -y
+        x = 'X%s' % -round(x, 2)
+        y = 'Y%s' % -round(y, 2)
         self.write('G01', x, y)
 
     def pen_up(self):

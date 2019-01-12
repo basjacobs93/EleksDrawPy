@@ -193,29 +193,29 @@ class Drawing(object):
     def origin(self):
         return self.move(0, 0, 0, 0)
 
-    def center(self, width, height):
+    def center(self, width=A4_BOUNDS[3], height=A4_BOUNDS[2]):
         return self.move(width / 2, height / 2, 0.5, 0.5)
 
-    def rotate_to_fit(self, width, height, step=5):
+    def rotate_to_fit(self, width=A4_BOUNDS[3], height=A4_BOUNDS[2], step=5):
         for angle in range(0, 180, step):
             drawing = self.rotate(angle)
             if drawing.width <= width and drawing.height <= height:
                 return drawing.center(width, height)
         return None
 
-    def scale_to_fit_height(self, height, padding=0):
+    def scale_to_fit_height(self, height=A4_BOUNDS[2], padding=0):
         return self.scale_to_fit(1e9, height, padding)
 
-    def scale_to_fit_width(self, width, padding=0):
+    def scale_to_fit_width(self, width=A4_BOUNDS[3], padding=0):
         return self.scale_to_fit(width, 1e9, padding)
 
-    def scale_to_fit(self, width=250, height=175, padding=0):
+    def scale_to_fit(self, width=A4_BOUNDS[3], height=A4_BOUNDS[2], padding=0):
         width -= padding * 2
         height -= padding * 2
         scale = min(width / self.width, height / self.height)
         return self.scale(scale, scale).center(width, height)
 
-    def rotate_and_scale_to_fit(self, width, height, padding=0, step=1):
+    def rotate_and_scale_to_fit(self, width=A4_BOUNDS[3], height=A4_BOUNDS[2], padding=0, step=1):
         values = []
         width -= padding * 2
         height -= padding * 2
@@ -263,7 +263,7 @@ class Drawing(object):
         if show_bounds:
             dc.set_source_rgb(0.5, 0.5, 0.5)
             dc.set_line_width(1 / scale)
-            dc.rectangle(x1, y1, w, h)
+            dc.rectangle(A4_BOUNDS[1], A4_BOUNDS[0], A4_BOUNDS[3], A4_BOUNDS[2])
             dc.stroke()
         dc.set_source_rgb(0, 0, 0)
         dc.set_line_width(line_width)
