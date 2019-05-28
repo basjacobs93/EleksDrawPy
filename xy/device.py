@@ -43,6 +43,10 @@ class Device(object):
             print(line)
         self.serial.write((line + '\n').encode('utf-8'))
         response = self.serial.readline().strip().decode('utf-8')
+        while response == "": # wait for 'ok' (otherwise buffer overloads)
+            if self.verbose:
+                print(response)
+            response = self.serial.readline().strip().decode('utf-8')
         if self.verbose:
             print(response)
 
@@ -52,13 +56,13 @@ class Device(object):
     def move(self, x, y):
         x = 'X%s' % -round(x, 2)
         y = 'Y%s' % -round(y, 2)
-        self.write('G01', x, y)
+        self.write('G1', x, y)
 
     def pen_up(self):
-        self.write('S0')
+        self.write('M3 S10')
 
     def pen_down(self):
-        self.write('S40')
+        self.write('M3 S60')
 
     def draw(self, points):
         if not points:
@@ -66,6 +70,7 @@ class Device(object):
 
         self.move(*points[0])
         self.pen_down()
+        self.write(' ')
         time.sleep(0.15)
         for point in points:
             self.move(*point)
