@@ -62,7 +62,7 @@ class Device(object):
         self.write('M3 S10')
 
     def pen_down(self):
-        self.write('M3 S60')
+        self.write('M3 S40')
 
     def draw(self, points):
         if not points:
@@ -70,12 +70,9 @@ class Device(object):
 
         self.move(*points[0])
         self.pen_down()
-        self.write(' ')
-        time.sleep(0.15)
         for point in points:
             self.move(*point)
         self.pen_up()
-        time.sleep(0.15)
 
     def gcode(self, g):
         for line in g.lines:
