@@ -45,18 +45,18 @@ def create_eye(x, y):
 
 def create_paths():
     result = []
-    for y in range(6*3):
-        for x in range(5*3):
+    for y in range(5*3):
+        for x in range(4*3):
             result.extend(create_eye(x, y))
     return result
 
 def main():
     paths = create_paths()
-    drawing = xy.Drawing(paths).scale_to_fit(315, 380)
-    drawing = drawing.sort_paths_greedy()
+    drawing = xy.Drawing(paths).origin().scale_to_fit(240, 165).center()
+    drawing = drawing.sort_paths()
     im = drawing.render()
     im.write_to_png('eyes.png')
-    # xy.draw(drawing)
+    xy.draw(drawing)
 
 if __name__ == '__main__':
     main()

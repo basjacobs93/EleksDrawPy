@@ -2,7 +2,6 @@ import xy
 from numpy import random
 
 def square(t, size, wiggle):
-
     t.right(int((random.random()-0.5)*wiggle))
     t.pendown()
     for i in range(4):
@@ -31,13 +30,13 @@ def main():
 
             square(t, 10, wiggle[iy]-1)
 
-            offset[iy] *= (1+random.random())
+            offset[iy] *= (1+random.random()*0.8)
             wiggle[iy] *= (1+random.random())
 
             
     drawing = t.drawing.origin().scale_to_fit(240, 165).center()
     drawing.render().write_to_png('out.png')
-    xy.draw(drawing, verbose = True)
+    xy.draw(drawing, verbose = False)
 
 if __name__ == '__main__':
     main()

@@ -3,12 +3,7 @@ import itertools
 import string
 
 TEXT = (
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor '
-    'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis '
-    'nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
-    'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu '
-    'fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in '
-    'culpa qui officia deserunt mollit anim id est laborum. '
+    'Bas Jacobs '
 )
 
 def word_wrap(text, width, measure_func):
@@ -79,7 +74,7 @@ class Font(object):
         return result
 
 def main():
-    font = Font(xy.CURSIVE, 600)
+    font = Font(xy.SCRIPTS, 600)
     d = font.wrap(TEXT, 115, 1, justify=True)
     d = d.center(130, 120)
     d = d.join_paths(tolerance = 0.1).simplify_paths(tolerance = 0.1)
