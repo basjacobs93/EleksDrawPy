@@ -1,4 +1,4 @@
-import xy
+import eleksdrawpy as xy
 
 def main(iteration):
     turtle = xy.Turtle()
@@ -9,8 +9,8 @@ def main(iteration):
         else:
             turtle.circle(1, 90, 36)
     drawing = turtle.drawing.rotate_and_scale_to_fit(240, 180, step=90)
-    # im = drawing.render()
-    # im.write_to_png("out.png")
+    im = drawing.render()
+    im.write_to_png("turtle.png")
     # xy.draw(drawing, verbose = True)
 
 if __name__ == '__main__':

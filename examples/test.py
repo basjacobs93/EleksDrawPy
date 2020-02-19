@@ -1,6 +1,6 @@
 from poisson_disc import poisson_disc
 import random
-import xy
+import eleksdrawpy as xy
 
 random.seed(1182)
 points, pairs = poisson_disc(0, 0, 315, 315, 1, 16)

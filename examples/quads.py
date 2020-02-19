@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw
 from collections import Counter
 import heapq
 import sys
-import xy
+import eleksdrawpy as xy
 
 MODE_RECTANGLE = 1
 MODE_ELLIPSE = 2

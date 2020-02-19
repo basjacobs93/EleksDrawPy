@@ -1,4 +1,4 @@
-import xy
+import eleksdrawpy as xy
 import math
 import random
 import sys

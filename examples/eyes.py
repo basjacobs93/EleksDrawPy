@@ -1,6 +1,6 @@
 import math
 import random
-import xy
+import eleksdrawpy as xy
 
 def ellipse(x, y, rx, ry, n=36):
     result = []

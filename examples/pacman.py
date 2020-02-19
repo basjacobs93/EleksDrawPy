@@ -1,7 +1,7 @@
 from PIL import Image
 import math
 import sys
-import xy
+import eleksdrawpy as xy
 
 COLORS = {
     '.': (255, 255, 255),

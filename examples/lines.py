@@ -1,5 +1,5 @@
 from math import sin, cos, pi
-import xy
+import eleksdrawpy as xy
 
 def hexagon():
     sides = 6

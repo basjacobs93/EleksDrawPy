@@ -2,7 +2,7 @@ import cv
 import cv2
 import numpy as np
 import time
-import xy
+import eleksdrawpy as xy
 
 def isolate_buildings(im):
     print 'isolate_buildings'

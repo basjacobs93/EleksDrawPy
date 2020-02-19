@@ -1,7 +1,7 @@
 from imposm.parser import OSMParser
 from math import radians, sin, cos
 import time
-import xy
+import eleksdrawpy as xy
 
 LAT, LNG = (40.777274, -73.967161)
 

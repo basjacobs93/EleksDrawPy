@@ -1,5 +1,5 @@
 import sys
-import xy
+import eleksdrawpy as xy
 
 def load_paths(filename):
     paths = []

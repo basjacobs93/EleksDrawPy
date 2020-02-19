@@ -1,7 +1,7 @@
 from math import hypot, atan2, sin, cos, pi
 import random
 import time
-import xy
+import eleksdrawpy as xy
 
 class Model(object):
     def __init__(self):

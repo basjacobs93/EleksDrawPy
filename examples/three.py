@@ -1,7 +1,7 @@
 from math import radians
 import random
-import xy
-import xyz
+import eleksdrawpy as xy
+import eleksdrawpy as xyz
 
 def cube(x, y, z):
     return xyz.Cube((x - 0.5, y - 0.5, z - 0.5), (x + 0.5, y + 0.5, z + 0.5))

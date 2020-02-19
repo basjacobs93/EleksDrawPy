@@ -1,7 +1,7 @@
 from math import radians
 import random
-import xy
-import xyz
+import eleksdrawpy as xy
+import eleksdrawpy as xyz
 
 PIPES = 8
 SIZE = 3

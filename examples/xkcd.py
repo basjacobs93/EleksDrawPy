@@ -1,4 +1,4 @@
-import xy
+import eleksdrawpy as xy
 
 from shapely.geometry import LineString, Polygon, MultiPolygon
 import math

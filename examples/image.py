@@ -1,7 +1,7 @@
 from PIL import Image
 import math
 import sys
-import xy
+import eleksdrawpy as xy
 
 def create_paths(im):
     f = (255 * 255 * 3) ** 0.5

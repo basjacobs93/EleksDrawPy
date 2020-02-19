@@ -2,7 +2,7 @@ from math import sin, cos, pi, hypot
 from poisson_disc import poisson_disc
 import random
 import time
-import xy
+import eleksdrawpy as xy
 
 def circle(cx, cy, r, n):
     result = []

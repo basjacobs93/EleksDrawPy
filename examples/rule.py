@@ -1,5 +1,5 @@
 from shapely import geometry
-import xy
+import eleksdrawpy as xy
 
 def compute_row(rule, previous):
     row = []

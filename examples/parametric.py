@@ -1,5 +1,5 @@
 from math import sin, cos, e, pi
-import xy
+import eleksdrawpy as xy
 
 def butterfly(t):
     x = sin(t) * (pow(e, cos(t)) - 2 * cos(4 * t) - pow(sin(t / 12), 5))

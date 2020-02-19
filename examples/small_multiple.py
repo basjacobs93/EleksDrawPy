@@ -1,4 +1,4 @@
-import xy
+import eleksdrawpy as xy
 from numpy import random
 
 def square(t, size, wiggle):
