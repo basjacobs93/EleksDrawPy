@@ -1,4 +1,4 @@
-# `xy` Software for the EleksDraw Plotter
+# `EleksDrawPy` Software for the EleksDraw Plotter
 
 ## Installation
 
