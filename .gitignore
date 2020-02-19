@@ -4,4 +4,5 @@
 *.png
 *.jpg
 .DS_Store
+*.egg-info
 

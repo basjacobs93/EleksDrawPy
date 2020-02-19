@@ -1,10 +1,10 @@
 from setuptools import setup
 
 setup(
-    name='xy',
+    name='eleksdrawpy',
     version='0.1',
     description='Library for working with the EleksDraw plotter.',
-    packages=['xy'],
+    packages=['eleksdrawpy'],
     install_requires=['pyserial', 'shapely', 'pyhull', 'cairocffi'],
     license='MIT'
 )
