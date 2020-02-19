@@ -1,4 +1,0 @@
-pyserial
-shapely
-pyhull
-cairocffi
