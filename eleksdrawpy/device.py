@@ -58,6 +58,11 @@ class Device(object):
         y = 'Y%s' % -round(y, 2)
         self.write('G1', x, y)
 
+    def move_rel(self, x, y):
+        self.write('G91') # relative coordinates
+        self.move(x, y)
+        self.write('G90') # back to absolute
+
     def pen_up(self):
         self.write('M3 S10')
 
@@ -77,3 +82,7 @@ class Device(object):
     def gcode(self, g):
         for line in g.lines:
             self.write(line)
+
+    def disconnect(self):
+        self.pen_up()
+        self.move(0, 0)
